@@ -1,6 +1,6 @@
 %{
   #include <stdio.h>
-  // #include "tp1.h"
+  //#include "compil.h"
   extern FILE* yyin;
   extern int yylex(void);
   extern char* yytext;
@@ -12,28 +12,51 @@
   char m[100];
   int tab[256];
 }
-%type <m> key_idf;
-%type <m> key_integer TYPE;
-%type <tab> IDFB;
-%token key_program key_idf key_point_virgule key_var key_integer key_begin key_end key_dpoint_egale key_dpoint key_plus key_moins key_multiplication key_division key_virgule key_number
+			
+%token key_main key_code  key_acc_open key_acc_close key_dpoint key_croch_open key_croch_close key_point key_plus key_minus key_mult key_div key_sup_eq key_inf_eq key_sup key_inf key_not_eq key_is_eq key_and key_or key_eq key_verif key_autre key_tq key_par_open key_par_close key_virg key_point_virg key_str key_idf key_float key_natural key_string key_natural_dec key_float_dec key_str_dec
 
-%left key_plus key_moins
-%left key_multiplication key_division
+%left key_or
+%left key_and
+%left key_sup key_sup_eq key_is_eq key_not_eq key_inf_eq key_inf
+%left key_plus key_minus
+%left key_mult key_div
 
 %start P
 
 %%
-   P: key_program key_idf key_point_virgule key_var BLOC_DEC key_begin BLOC_INST key_end  {printf("\n____%s\n",$2);}
-   ;
- BLOC_DEC: DEC BLOC_DEC |;
- DEC: IDFB key_dpoint TYPE key_point_virgule ;
- IDFB: key_idf {printf("\n____%s\n",$1);}
-   | IDFB key_virgule key_idf {printf("\n____%s\n",$3);}
-   ;
- TYPE: key_integer;
- BLOC_INST:INST BLOC_INST | ;
- INST: key_idf key_dpoint_egale EXP key_point_virgule {printf("\n____%s\n",$1);};
- EXP: EXP key_plus EXP | key_idf {printf("\n____%s\n",$1);} | key_number;
+   P: key_main key_acc_open BLOC_DEC key_acc_close key_code key_acc_open BLOC_INST key_acc_close
+;
+ BLOC_DEC: DEC BLOC_DEC |
+;
+ DEC: key_idf key_dpoint TYPE key_point_virg
+	| key_idf key_croch_open key_natural key_croch_close key_dpoint TYPE key_point_virg
+;
+ TYPE: key_natural_dec | key_float_dec | key_str_dec
+;
+ BLOC_INST:INST BLOC_INST |
+;
+ INST: AFFECTATION key_point_virg|VERIF |TANTQUE
+;
+ AFFECTATION: key_idf key_eq key_string| key_idf key_eq EXP
+;
+VALEUR_NUM:key_natural|key_float|key_idf
+	;
+EXP: VALEUR_NUM OPERATION_AR EXP|VALEUR_NUM
+	;
+OPERATION_AR: key_plus|key_minus|key_mult|key_div
+	;
+VERIF:	key_verif key_par_open CONDITION key_par_close key_acc_open BLOC_INST key_acc_close  key_autre key_acc_open BLOC_INST key_acc_close
+	;
+CONDITION:EXP_LOG OPERATEUR_LOG CONDITION|EXP_LOG
+	;
+EXP_LOG: EXP OPERATION_LOG EXP;
+	;
+OPERATEUR_LOG:	key_or|key_and
+	;
+OPERATION_LOG:	key_sup| key_sup_eq| key_is_eq| key_not_eq| key_inf_eq| key_inf
+	;
+TANTQUE: key_tq	key_par_open AFFECTATION key_virg key_par_open CONDITION key_par_close key_virg AFFECTATION key_par_close key_acc_open BLOC_INST key_acc_close
+	;
 
 %%
 int main(int argc,char**argv){

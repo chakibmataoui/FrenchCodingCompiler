@@ -11,4 +11,4 @@ flex-alone : flex
 	gcc -o flex_comp lex.yy.c
 
 clean :
-	rm *~ flex_comp comp
+	rm *~ flex_comp comp 

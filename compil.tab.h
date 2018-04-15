@@ -30,8 +30,8 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-#ifndef YY_YY_TP1_TAB_H_INCLUDED
-# define YY_YY_TP1_TAB_H_INCLUDED
+#ifndef YY_YY_COMPIL_TAB_H_INCLUDED
+# define YY_YY_COMPIL_TAB_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -45,21 +45,42 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    key_program = 258,
-    key_idf = 259,
-    key_point_virgule = 260,
-    key_var = 261,
-    key_integer = 262,
-    key_begin = 263,
-    key_end = 264,
-    key_dpoint_egale = 265,
-    key_dpoint = 266,
-    key_plus = 267,
-    key_moins = 268,
-    key_multiplication = 269,
-    key_division = 270,
-    key_virgule = 271,
-    key_number = 272
+    key_main = 258,
+    key_code = 259,
+    key_acc_open = 260,
+    key_acc_close = 261,
+    key_dpoint = 262,
+    key_croch_open = 263,
+    key_croch_close = 264,
+    key_point = 265,
+    key_plus = 266,
+    key_minus = 267,
+    key_mult = 268,
+    key_div = 269,
+    key_sup_eq = 270,
+    key_inf_eq = 271,
+    key_sup = 272,
+    key_inf = 273,
+    key_not_eq = 274,
+    key_is_eq = 275,
+    key_and = 276,
+    key_or = 277,
+    key_eq = 278,
+    key_verif = 279,
+    key_autre = 280,
+    key_tq = 281,
+    key_par_open = 282,
+    key_par_close = 283,
+    key_virg = 284,
+    key_point_virg = 285,
+    key_str = 286,
+    key_idf = 287,
+    key_float = 288,
+    key_natural = 289,
+    key_string = 290,
+    key_natural_dec = 291,
+    key_float_dec = 292,
+    key_str_dec = 293
   };
 #endif
 
@@ -68,12 +89,12 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 11 "tp1.y" /* yacc.c:1909  */
+#line 11 "compil.y" /* yacc.c:1909  */
 
   char m[100];
   int tab[256];
 
-#line 77 "tp1.tab.h" /* yacc.c:1909  */
+#line 98 "compil.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -86,4 +107,4 @@ extern YYSTYPE yylval;
 
 int yyparse (void);
 
-#endif /* !YY_YY_TP1_TAB_H_INCLUDED  */
+#endif /* !YY_YY_COMPIL_TAB_H_INCLUDED  */
