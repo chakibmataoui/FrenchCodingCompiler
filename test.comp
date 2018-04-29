@@ -1,31 +1,29 @@
 MAIN
 {
-	i : NATURAL;
-	var : FLOAT;
-	vari : NATURAL;
-	variable [15] : STRING;
+	nbreiv : NATURAL;
+	existe : NATURAL;
+	ivmoy [30] : FLOAT;
+	compteur : NATURAL;
+	somme : FLOAT;
+	nbadmis : NATURAL;
+	secivmoy : FLOAT;
 }
-$Commentaire millieu
 CODE
 {
-	$Commentaire N1
-	vari = 15;
-	var = 1.2 + 5 * 4 / 0.25;
-	variable = 'reussi';
-	VERIF(var >= vari)
+	$ k tablau ivmoy est trié
+	nbreiv = 25;
+	existe = 0 ;
+	TANTQUE (compteur = 0 ,((compteur <= nbreiv) & (existe == 0)) , compteur = compteur = compteur+1)
 	{
-		variable = 'reussi';
+		VERIF(ivmoy[compteur] < 0)
+		{
+			existe = 1;
+		}
+		AUTRE
+		{
+			somme = somme + ivmoy[compteur];
+		}
 	}
-	AUTRE
-	{
-		$ Nouveau commentaire
-		variable = 'echou';
-	}
-		variable = 'reussi';
-	TANT QUE(i = 0,(i != 10),i=i+1)
-	{
-		vari = vari + i;
-	}
-	
+nbadmis = compteur;
+secivmoy = somme / compteur;
 }
-

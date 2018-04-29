@@ -13,7 +13,7 @@
   int tab[256];
 }
 			
-%token key_main key_code  key_acc_open key_acc_close key_dpoint key_croch_open key_croch_close key_point key_plus key_minus key_mult key_div key_sup_eq key_inf_eq key_sup key_inf key_not_eq key_is_eq key_and key_or key_eq key_verif key_autre key_tq key_par_open key_par_close key_virg key_point_virg key_str key_idf key_float key_natural key_string key_natural_dec key_float_dec key_str_dec
+%token key_main key_code  key_acc_open key_acc_close key_dpoint key_croch_open key_croch_close key_point key_plus key_minus key_mult key_div key_sup_eq key_inf_eq key_sup key_inf key_not_eq key_is_eq key_and key_or key_eq key_verif key_autre key_tq key_par_open key_par_close key_virg key_point_virg key_idf key_float key_natural key_string key_natural_dec key_float_dec key_str_dec
 
 %left key_or
 %left key_and
@@ -37,9 +37,11 @@
 ;
  INST: AFFECTATION key_point_virg|VERIF |TANTQUE
 ;
- AFFECTATION: key_idf key_eq key_string| key_idf key_eq EXP
+ AFFECTATION: IDF key_eq key_string|IDF key_eq EXP
 ;
-VALEUR_NUM:key_natural|key_float|key_idf
+IDF : key_idf|key_idf key_croch_open EXP key_croch_close
+;
+VALEUR_NUM:key_natural|key_float|IDF
 	;
 EXP: VALEUR_NUM OPERATION_AR EXP|VALEUR_NUM
 	;
@@ -49,7 +51,7 @@ VERIF:	key_verif key_par_open CONDITION key_par_close key_acc_open BLOC_INST key
 	;
 CONDITION:EXP_LOG OPERATEUR_LOG CONDITION|EXP_LOG
 	;
-EXP_LOG: EXP OPERATION_LOG EXP;
+EXP_LOG: EXP OPERATION_LOG EXP| key_par_open EXP OPERATION_LOG EXP key_par_close;
 	;
 OPERATEUR_LOG:	key_or|key_and
 	;
@@ -60,9 +62,10 @@ TANTQUE: key_tq	key_par_open AFFECTATION key_virg key_par_open CONDITION key_par
 
 %%
 int main(int argc,char**argv){
-yyin = fopen(argv[1],"r");
-yyparse();
- afficher();
+    init();
+    yyin = fopen(argv[1],"r");
+    yyparse();
+    afficher();
 }
 
 int yyerror(char* message){

@@ -73,14 +73,13 @@ extern int yydebug;
     key_par_close = 283,
     key_virg = 284,
     key_point_virg = 285,
-    key_str = 286,
-    key_idf = 287,
-    key_float = 288,
-    key_natural = 289,
-    key_string = 290,
-    key_natural_dec = 291,
-    key_float_dec = 292,
-    key_str_dec = 293
+    key_idf = 286,
+    key_float = 287,
+    key_natural = 288,
+    key_string = 289,
+    key_natural_dec = 290,
+    key_float_dec = 291,
+    key_str_dec = 292
   };
 #endif
 
@@ -94,7 +93,7 @@ union YYSTYPE
   char m[100];
   int tab[256];
 
-#line 98 "compil.tab.h" /* yacc.c:1909  */
+#line 97 "compil.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

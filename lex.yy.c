@@ -980,34 +980,43 @@ YY_RULE_SETUP
 case 37:
 YY_RULE_SETUP
 #line 76 "compil.l"
-{printf("float");
+{
+if(atoi(yytext) > 1000){
+yyerror("Nombre trop grand");
+return 0;
+}
+printf("float");
   return key_float;}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 78 "compil.l"
+#line 83 "compil.l"
 {
+if(atoi(yytext) > 1000){
+yyerror("Nombre trop grand");
+return 0;
+}
   printf("natural");
   return key_natural;
 }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 83 "compil.l"
+#line 92 "compil.l"
 {printf("str");
   return key_string;}
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 85 "compil.l"
+#line 94 "compil.l"
 {printf("erreur caractère non reconnue a la ligne %d : \"%s\"",yylineno,yytext);}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 86 "compil.l"
+#line 95 "compil.l"
 ECHO;
 	YY_BREAK
-#line 1011 "lex.yy.c"
+#line 1020 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2008,7 +2017,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 86 "compil.l"
+#line 95 "compil.l"
 
 
 

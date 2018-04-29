@@ -2,40 +2,52 @@
 #define TP1_H
 #include <string.h>
 typedef struct symbol_table{
-    char name[10];
-    char type[255];
-    char nature;
-    int taille;
-  } symbol_table;
-symbol_table t[1000];
-int last_entry = 0;
+  int al;
+  char name[10];
+  char type[255];
+  char nature;
+  int taille;
+} symbol_table;
+symbol_table *t;
 static char last_type[255];
 
-void ajouter(char* sym){
-  int exist = 0;
-  for(int i = 0; i < last_entry;++i){
-    if(strcmp(sym,t[i].name) == 0)
-      exist = 1;
-  }
-  if(exist)return;
-  strcpy(t[last_entry].name,sym);
-  strcpy(t[last_entry].type,"");
-  t[last_entry].nature = "";
-  t[last_entry].taille = -1;
-  last_entry++;
-}
- void afficher(){
-  printf("\n\n\ntables des symboles : %d\n",last_entry);
-  printf("IDF\tTYPE\tNATURE\tTAILLE\n");
-  for(int i = 0; i < last_entry;++i)
-    printf("%s\t%s\n",t[i].name,t[i].type);
+void init(){
+  int size = ((int)'z')*8+1;
+  t = (symbol_table*)malloc(size*sizeof(symbol_table));
+  for(int i = 0; i < size;++i)
+    t[i].al = 0;
 }
 
- void mise_a_jour(char* sym,char* type){
-  for(int i = 0; i < last_entry;++i){
-    if(strcmp(sym,t[i].name) == 0){
-      strcpy(t[i].type,type);
-    }
+void ajouter(char* sym){
+  int val = 0;
+  for(int i = 0; i < strlen(sym);++i)
+    val += (int)sym[i];
+  if(t[val].al == 0){
+    strcpy(t[val].name,sym);
+    strcpy(t[val].type,"");
+    t[val].nature = "";
+    t[val].taille = -1;
+    t[val].al = 1;
+  }
+}
+ void afficher(){
+  printf("\n\n\ntables des symboles :\n");
+  printf("IDF\tTYPE\tNATURE\tTAILLE\n");
+  for(int i = 0; i < ((int)'z')*8;++i)
+    if(t[i].al != 0)
+      printf("%s\t%s\n",t[i].name,t[i].type);
+}
+
+void mise_a_jour_type(char* sym,char* type){
+  int val = 0;
+  for(int i = 0; i < strlen(sym);++i)
+    val += (int)sym[i];
+  if(t[val].al == 0){
+    strcpy(t[val].name,sym);
+    strcpy(t[val].type,"");
+    t[val].nature = "";
+    t[val].taille = -1;
+    t[val].al = 1;
   }
 }
 #endif

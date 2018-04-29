@@ -73,9 +73,18 @@ comment \$.*\n
   printf("idf");
   return key_idf;
  }
-{val_float} {printf("float");
+{val_float} {
+if(atoi(yytext) > 1000){
+yyerror("Nombre trop grand");
+return 0;
+}
+printf("float");
   return key_float;}
 {val_natural} {
+if(atoi(yytext) > 1000){
+yyerror("Nombre trop grand");
+return 0;
+}
   printf("natural");
   return key_natural;
 }
