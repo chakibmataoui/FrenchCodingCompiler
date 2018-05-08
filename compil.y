@@ -11,6 +11,7 @@
 %union {
   char m[100];
   int tab[256];
+  char* s;
 }
 			
 %token key_main key_code  key_acc_open key_acc_close key_dpoint key_croch_open key_croch_close key_point key_plus key_minus key_mult key_div key_sup_eq key_inf_eq key_sup key_inf key_not_eq key_is_eq key_and key_or key_eq key_verif key_autre key_tq key_par_open key_par_close key_virg key_point_virg key_idf key_float key_natural key_string key_natural_dec key_float_dec key_str_dec
@@ -28,7 +29,7 @@
 ;
  BLOC_DEC: DEC BLOC_DEC |
 ;
- DEC: key_idf key_dpoint TYPE key_point_virg
+ DEC: key_idf key_dpoint TYPE key_point_virg { printf();}
 	| key_idf key_croch_open key_natural key_croch_close key_dpoint TYPE key_point_virg
 ;
  TYPE: key_natural_dec | key_float_dec | key_str_dec

@@ -74,7 +74,7 @@ comment \$.*\n
   return key_idf;
  }
 {val_float} {
-if(atoi(yytext) > 1000){
+if(atof(yytext) > 1000){
 yyerror("Nombre trop grand");
 return 0;
 }

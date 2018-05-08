@@ -1,7 +1,7 @@
 MAIN
 {
 	nbreiv : NATURAL;
-	existe : NATURAL;
+	exist : NATURAL;
 	ivmoy [30] : FLOAT;
 	compteur : NATURAL;
 	somme : FLOAT;
@@ -12,18 +12,18 @@ CODE
 {
 	$ k tablau ivmoy est trié
 	nbreiv = 25;
-	existe = 0 ;
-	TANTQUE (compteur = 0 ,((compteur <= nbreiv) & (existe == 0)) , compteur = compteur = compteur+1)
+	existe = 0;
+	TANT QUE (compteur = 0 ,((compteur <= nbreiv) |(existe > 0)), compteur = compteur+1)
 	{
 		VERIF(ivmoy[compteur] < 0)
 		{
-			existe = 1;
+			existe = 1000000;
 		}
 		AUTRE
 		{
 			somme = somme + ivmoy[compteur];
 		}
 	}
-nbadmis = compteur;
-secivmoy = somme / compteur;
+	nbadmis = compteur;
+	secivmoy = somme /compteur;
 }
