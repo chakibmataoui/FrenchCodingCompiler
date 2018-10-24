@@ -1,8 +1,11 @@
 %{
 #include <stdio.h>
-#include "compil.tab.h"
+#include <string.h>
 #include "compil.h"
+#include "compil.tab.h"
+
   extern int yyline;
+  extern int yyerror(char*);
   //extern char* yylval;
 %}
 
@@ -30,21 +33,21 @@ comment \$.*\n
 "\n" {printf("%s",yytext);yylineno++;}
 "\t" {printf("%s",yytext);}
 
-"NATURAL" {printf("%s",yytext);return key_natural_dec;}
-"FLOAT" {printf("%s",yytext);return key_float_dec;}
-"STRING" {printf("%s",yytext);return key_str_dec;}
+"NATURAL" {printf("%s",yytext);strcpy(yylval.keyW,yytext);return key_natural_dec;}
+"FLOAT" {printf("%s",yytext);strcpy(yylval.keyW,yytext);return key_float_dec;}
+"STRING" {printf("%s",yytext);strcpy(yylval.keyW,yytext);return key_str_dec;}
 
-"+" {printf("%s",yytext);return key_plus;}
-"-" {printf("%s",yytext);return key_minus;}
-"*" {printf("%s",yytext);return key_mult;}
-"/" {printf("%s",yytext);return key_div;}
+"+" {strcpy(yylval.keyW,yytext);return key_plus;}
+"-" {strcpy(yylval.keyW,yytext);return key_minus;}
+"*" {strcpy(yylval.keyW,yytext);return key_mult;}
+"/" {strcpy(yylval.keyW,yytext);return key_div;}
 
-">=" {printf("%s",yytext);return key_sup_eq;}
-"<=" {printf("%s",yytext);return key_inf_eq;}
-">" {printf("%s",yytext);return key_sup;}
-"<" {printf("%s",yytext);return key_inf;}
-"!=" {printf("%s",yytext);return key_not_eq;}
-"==" {printf("%s",yytext);return key_is_eq;}
+">=" {strcpy(yylval.keyW,yytext);return key_sup_eq;}
+"<=" {strcpy(yylval.keyW,yytext);return key_inf_eq;}
+">" {strcpy(yylval.keyW,yytext);return key_sup;}
+"<" {strcpy(yylval.keyW,yytext);return key_inf;}
+"!=" {strcpy(yylval.keyW,yytext);return key_not_eq;}
+"==" {strcpy(yylval.keyW,yytext);return key_is_eq;}
 
 "&" {printf("%s",yytext);return key_and;}
 "|" {printf("%s",yytext);return key_or;}
@@ -66,30 +69,43 @@ comment \$.*\n
 
 {idf} {   
   if(yyleng > 8){
-    //yyerror("Idf trop long");
+    yyerror("Idf trop long");
     return 0;
   }
   ajouter(yytext);
-  printf("idf");
+  strcpy(yylval.idf,yytext);
+  printf("%s",yylval.idf);
   return key_idf;
  }
 {val_float} {
-if(atof(yytext) > 1000){
-yyerror("Nombre trop grand");
-return 0;
-}
-printf("float");
+  if(atof(yytext) > 10000){
+    yyerror("Nombre trop grand");
+    return 0;
+  }
+  strcpy(yylval.v.value,yytext);
+   strcpy(yylval.v.type,"FLOAT");
+  //yylval.fn = atof(yytext);
+  printf("float");
   return key_float;}
 {val_natural} {
-if(atoi(yytext) > 1000){
-yyerror("Nombre trop grand");
-return 0;
-}
+  if(atoi(yytext) > 10000){
+    yyerror("Nombre trop grand");
+    return 0;
+  }
+  strcpy(yylval.v.value,yytext);
+  strcpy(yylval.v.type,"NATURAL");
+  //yylval.natural = atoi(yytext);
   printf("natural");
   return key_natural;
 }
 
 {val_string} {printf("str");
+  if(strlen(yytext) > 255){
+    yyerror("Chaine de caractère trop grande");
+    return 0;
+  }
+  strcpy(yylval.v.value,yytext);
+  strcpy(yylval.v.type,"STRING");
   return key_string;}
 . {printf("erreur caractère non reconnue a la ligne %d : \"%s\"",yylineno,yytext);}
 %%

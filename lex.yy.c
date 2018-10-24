@@ -506,11 +506,14 @@ char *yytext;
 #line 1 "compil.l"
 #line 2 "compil.l"
 #include <stdio.h>
-#include "compil.tab.h"
+#include <string.h>
 #include "compil.h"
+#include "compil.tab.h"
+
   extern int yyline;
+  extern int yyerror(char*);
   //extern char* yylval;
-#line 514 "lex.yy.c"
+#line 517 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -728,9 +731,9 @@ YY_DECL
 		}
 
 	{
-#line 14 "compil.l"
+#line 17 "compil.l"
 
-#line 734 "lex.yy.c"
+#line 737 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -789,234 +792,247 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 15 "compil.l"
+#line 18 "compil.l"
 {printf("%s",yytext);return key_main;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 16 "compil.l"
+#line 19 "compil.l"
 {printf("%s",yytext);return key_code;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 19 "compil.l"
+#line 22 "compil.l"
 {printf("%s",yytext);return key_acc_open;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 20 "compil.l"
+#line 23 "compil.l"
 {printf("%s",yytext);return key_acc_close;}
 	YY_BREAK
 case 5:
 /* rule 5 can match eol */
 YY_RULE_SETUP
-#line 22 "compil.l"
+#line 25 "compil.l"
 {printf("%s",yytext);yylineno++;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 24 "compil.l"
+#line 27 "compil.l"
 {printf("%s",yytext);return key_dpoint;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 25 "compil.l"
+#line 28 "compil.l"
 {printf("%s",yytext);return key_croch_open;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 26 "compil.l"
+#line 29 "compil.l"
 {printf("%s",yytext);return key_croch_close;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 28 "compil.l"
+#line 31 "compil.l"
 {printf("%s",yytext);return key_point;}
 	YY_BREAK
 case 10:
 /* rule 10 can match eol */
 YY_RULE_SETUP
-#line 30 "compil.l"
+#line 33 "compil.l"
 {printf("%s",yytext);yylineno++;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 31 "compil.l"
+#line 34 "compil.l"
 {printf("%s",yytext);}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 33 "compil.l"
-{printf("%s",yytext);return key_natural_dec;}
+#line 36 "compil.l"
+{printf("%s",yytext);strcpy(yylval.keyW,yytext);return key_natural_dec;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 34 "compil.l"
-{printf("%s",yytext);return key_float_dec;}
+#line 37 "compil.l"
+{printf("%s",yytext);strcpy(yylval.keyW,yytext);return key_float_dec;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 35 "compil.l"
-{printf("%s",yytext);return key_str_dec;}
+#line 38 "compil.l"
+{printf("%s",yytext);strcpy(yylval.keyW,yytext);return key_str_dec;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 37 "compil.l"
-{printf("%s",yytext);return key_plus;}
+#line 40 "compil.l"
+{strcpy(yylval.keyW,yytext);return key_plus;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 38 "compil.l"
-{printf("%s",yytext);return key_minus;}
+#line 41 "compil.l"
+{strcpy(yylval.keyW,yytext);return key_minus;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 39 "compil.l"
-{printf("%s",yytext);return key_mult;}
+#line 42 "compil.l"
+{strcpy(yylval.keyW,yytext);return key_mult;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 40 "compil.l"
-{printf("%s",yytext);return key_div;}
+#line 43 "compil.l"
+{strcpy(yylval.keyW,yytext);return key_div;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 42 "compil.l"
-{printf("%s",yytext);return key_sup_eq;}
+#line 45 "compil.l"
+{strcpy(yylval.keyW,yytext);return key_sup_eq;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 43 "compil.l"
-{printf("%s",yytext);return key_inf_eq;}
+#line 46 "compil.l"
+{strcpy(yylval.keyW,yytext);return key_inf_eq;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 44 "compil.l"
-{printf("%s",yytext);return key_sup;}
+#line 47 "compil.l"
+{strcpy(yylval.keyW,yytext);return key_sup;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 45 "compil.l"
-{printf("%s",yytext);return key_inf;}
+#line 48 "compil.l"
+{strcpy(yylval.keyW,yytext);return key_inf;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 46 "compil.l"
-{printf("%s",yytext);return key_not_eq;}
+#line 49 "compil.l"
+{strcpy(yylval.keyW,yytext);return key_not_eq;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 47 "compil.l"
-{printf("%s",yytext);return key_is_eq;}
+#line 50 "compil.l"
+{strcpy(yylval.keyW,yytext);return key_is_eq;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 49 "compil.l"
+#line 52 "compil.l"
 {printf("%s",yytext);return key_and;}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 50 "compil.l"
+#line 53 "compil.l"
 {printf("%s",yytext);return key_or;}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 52 "compil.l"
+#line 55 "compil.l"
 {printf("%s",yytext);return key_eq;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 54 "compil.l"
+#line 57 "compil.l"
 {printf("%s",yytext);return key_verif;}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 55 "compil.l"
+#line 58 "compil.l"
 {printf("%s",yytext);return key_autre;}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 56 "compil.l"
+#line 59 "compil.l"
 {printf("%s",yytext);return key_tq;}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 58 "compil.l"
+#line 61 "compil.l"
 {printf("%s",yytext);return key_par_open;}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 59 "compil.l"
+#line 62 "compil.l"
 {printf("%s",yytext);return key_par_close;}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 61 "compil.l"
+#line 64 "compil.l"
 {printf("%s",yytext);}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 63 "compil.l"
+#line 66 "compil.l"
 {printf("%s",yytext);return key_virg;}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 64 "compil.l"
+#line 67 "compil.l"
 {printf("%s",yytext);return key_point_virg;}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 67 "compil.l"
+#line 70 "compil.l"
 {   
   if(yyleng > 8){
-    //yyerror("Idf trop long");
+    yyerror("Idf trop long");
     return 0;
   }
   ajouter(yytext);
-  printf("idf");
+  strcpy(yylval.idf,yytext);
+  printf("%s",yylval.idf);
   return key_idf;
  }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 76 "compil.l"
+#line 80 "compil.l"
 {
-if(atoi(yytext) > 1000){
-yyerror("Nombre trop grand");
-return 0;
-}
-printf("float");
+  if(atof(yytext) > 10000){
+    yyerror("Nombre trop grand");
+    return 0;
+  }
+  strcpy(yylval.v.value,yytext);
+   strcpy(yylval.v.type,"FLOAT");
+  //yylval.fn = atof(yytext);
+  printf("float");
   return key_float;}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 83 "compil.l"
+#line 90 "compil.l"
 {
-if(atoi(yytext) > 1000){
-yyerror("Nombre trop grand");
-return 0;
-}
+  if(atoi(yytext) > 10000){
+    yyerror("Nombre trop grand");
+    return 0;
+  }
+  strcpy(yylval.v.value,yytext);
+  strcpy(yylval.v.type,"NATURAL");
+  //yylval.natural = atoi(yytext);
   printf("natural");
   return key_natural;
 }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 92 "compil.l"
+#line 102 "compil.l"
 {printf("str");
+  if(strlen(yytext) > 255){
+    yyerror("Chaine de caractère trop grande");
+    return 0;
+  }
+  strcpy(yylval.v.value,yytext);
+  strcpy(yylval.v.type,"STRING");
   return key_string;}
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 94 "compil.l"
+#line 110 "compil.l"
 {printf("erreur caractère non reconnue a la ligne %d : \"%s\"",yylineno,yytext);}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 95 "compil.l"
+#line 111 "compil.l"
 ECHO;
 	YY_BREAK
-#line 1020 "lex.yy.c"
+#line 1036 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2017,7 +2033,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 95 "compil.l"
+#line 111 "compil.l"
 
 
 

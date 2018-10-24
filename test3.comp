@@ -7,13 +7,14 @@ MAIN
 	somme : FLOAT;
 	nbadmis : NATURAL;
 	secivmoy : FLOAT;
+	hello : STRING;
 }
 CODE
 {
 	$ k tablau ivmoy est trié
 	nbreiv = 25;
 	existe = 0;
-	TANT QUE (compteur = 0 ,((compteur <= nbreiv) |(existe > 0)), compteur = compteur+1)
+	TANT QUE (compteur = 0 ,((compteur <= nbreiv) & (existe > 0)), compteur = compteur+1)
 	{
 		VERIF(ivmoy[compteur] < 0)
 		{
@@ -25,5 +26,5 @@ CODE
 		}
 	}
 	nbadmis = compteur;
-	secivmoy = somme /compteur;
+	secivmoy = somme * compteur - 2 ;
 }

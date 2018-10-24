@@ -1,0 +1,31 @@
+MAIN
+{
+   comp : NATURAL ; 
+   existe : NATURAL ;
+   n : NATURAL ;
+   iv : NATURAL ;
+   ms : FLOAT ;
+	
+   cpl : FLOAT ;
+   tab[25] : FLOAT ;
+}
+CODE
+{
+      n = 20;													
+																
+      VERIF ((n!=0) & (existe==1))								
+	  {
+		TANT QUE (comp = 5, (comp <= n), comp = comp +1)		
+		{
+			iv = 4 + comp ;
+			ms = 5 + comp - 1 ;									
+			cpl = ms * comp ;									
+		}
+	  }
+	  AUTRE
+	  {
+		existe = 0 ;												
+	  }
+	  
+	  n = 0 ;
+}

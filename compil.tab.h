@@ -39,6 +39,12 @@
 #if YYDEBUG
 extern int yydebug;
 #endif
+/* "%code requires" blocks.  */
+#line 11 "compil.y" /* yacc.c:1909  */
+
+    
+
+#line 48 "compil.tab.h" /* yacc.c:1909  */
 
 /* Token type.  */
 #ifndef YYTOKENTYPE
@@ -88,12 +94,19 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 11 "compil.y" /* yacc.c:1909  */
+#line 14 "compil.y" /* yacc.c:1909  */
 
-  char m[100];
-  int tab[256];
+  char idf[256];
+  char keyW[256];
+  struct val{char type[20]; char value[1000];} v;
+  struct boolean{
+    struct Liste *vrai;
+    struct Liste *faux;
+  } boolean;
+  struct Liste *ver;
+  int quad;
 
-#line 97 "compil.tab.h" /* yacc.c:1909  */
+#line 110 "compil.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

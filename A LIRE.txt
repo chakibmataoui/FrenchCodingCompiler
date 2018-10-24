@@ -1,0 +1,5 @@
+PROJET réalisé sous linux :
+Pour compiler executer dans ce dossier la commande : make
+Pour executer le compilateur executer la commande : ./exe [NOM DU FICHIER]
+
+Binome IV.B3 (Mataoui,Chaib)

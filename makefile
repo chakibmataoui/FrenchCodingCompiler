@@ -1,5 +1,5 @@
 all : bison flex
-	gcc -o comp lex.yy.c compil.tab.c
+	gcc -g -o comp lex.yy.c compil.tab.c compil.c
 
 bison :
 	bison -d compil.y
